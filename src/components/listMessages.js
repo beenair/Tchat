@@ -8,39 +8,27 @@ export default class ListeMessages extends Component{
 
   state = {
     messages : [],
-    reloaded: false
+    reloaded: 0
   }
 
+
+  chargerMessages(){
+    axios.get('http://localhost:3002/messages')
+        .then((res)=>{
+          this.setState({messages : res.data})
+        })
+  }
 
 
   componentDidMount(){
-
-    axios.get('http://localhost:3002/messages')
-      .then((res)=>{
-        this.setState({messages : res.data})
-      })
+    this.chargerMessages()
 
     // setInterval(() => {
-    //   axios.get('http://localhost:3002/messages')
-    //   .then((res)=>{
-    //     this.setState({messages : res.data})
-    //   })
-    // }, 10000);
-    
+    //   this.chargerMessages()
+    // }, 2000);
   }
 
 
-  componentDidUpdate(){
-
-    const reloaded = this.state.reloaded
-
-    reloaded ? 
-      axios.get('http://localhost:3002/messages')
-      .then((res)=>{
-        this.setState({messages : res.data})
-      })
-      : console.log("La page est rechargée");
-  }
 
   render(){
 
