@@ -15,7 +15,7 @@ function App() {
         <ListeMessages/>
       </div>
 
-      <div className="h-14 flex-initial bg-green-500">
+      <div className="h-14 mb-8 flex items-center border-2 border-gray-400">
         <FrmNewMessage/>
       </div>
 

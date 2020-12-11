@@ -7,7 +7,7 @@ export default function Message(props){
     
     <div className="w-full h-8 flex flex-row items-center gap-4">
 
-      <div className="w-32 text-xl text-right font-semibold">
+      <div className="w-32 text-right font-semibold">
         {props.pseudo} :
       </div>
 
