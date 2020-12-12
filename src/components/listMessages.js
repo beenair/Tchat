@@ -1,44 +1,29 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import Message from './message'
+import {connect} from 'react-redux'
 
 
-export default class ListeMessages extends Component{
-
-
-  state = {
-    messages : [],
-    reloaded: 0
-  }
-
-
-  chargerMessages(){
-    axios.get('http://localhost:3002/messages')
-        .then((res)=>{
-          this.setState({messages : res.data})
-        })
-  }
+class ListeMessages extends Component{
 
 
   componentDidMount(){
-    this.chargerMessages()
-
-    // setInterval(() => {
-    //   this.chargerMessages()
-    // }, 2000);
+    this.props.chargerMessages()
+    console.log(this.props.messages);
   }
 
 
 
   render(){
 
-    const messages = this.state.messages.map(message=>{
+    const messages = this.props.messages.map(message=>{
       return <Message
         key = {message.id}
         pseudo = {message.pseudo}
         content = {message.content}
       />
     })
+
+    console.log(this.props.reloader);
 
     return(
       
@@ -49,3 +34,21 @@ export default class ListeMessages extends Component{
     )
   }
 }
+
+
+const mapStateToProps = state =>{
+  return{
+    reloader : state.pageReloaded,
+    messages : state.messages
+  }
+}
+
+const mapDispatchToProps = dispatch =>{
+  return{
+    chargerMessages : ()=> dispatch({type:'LOAD'})
+  }
+}
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListeMessages)

@@ -1,13 +1,12 @@
-import Axios from 'axios'
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
 
 
-export default class FrmNewMessage extends Component{
-
+class FrmNewMessage extends Component{
 
   state = {
-      pseudo : '',
-      content : ''
+    content : '',
+    pseudo : ''
   }
 
 
@@ -19,19 +18,6 @@ export default class FrmNewMessage extends Component{
     this.setState({pseudo : e.target.value})
   }
 
-  handleSubmit= e=> {
-
-    e.preventDefault();
-    
-    Axios.post('http://localhost:3002/postMessage', {
-      pseudo : this.state.pseudo,
-      content : this.state.content
-    })
-    .then(res => console.log(res))
-
-    this.setState({pseudo :''})
-    this.setState({content :''})
-  }
 
 
   render(){
@@ -49,10 +35,26 @@ export default class FrmNewMessage extends Component{
           </div>
           {/* Bouton envoyer */}
           <div className="w-24 h-full">
-            <input className="text-white font-semibold bg-green-500 p-2 rounded-md cursor-pointer" type='submit' value='Envoyer' onClick={this.handleSubmit}/>
+            <input className="text-white font-semibold bg-green-500 p-2 rounded-md cursor-pointer" type='submit' value='Envoyer' onClick={this.props.insertMessage}/>
           </div>
         </div>
 
     )
   }
 }
+
+
+const mapStateToProps = state =>{
+  return{
+    reloader : state.pageReloaded,
+  }
+}
+
+const mapDispatchToProps = dispatch =>{
+  return{
+    insertMessage : ()=> dispatch({type : 'INSERT'})
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(FrmNewMessage)
