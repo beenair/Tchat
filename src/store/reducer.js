@@ -20,7 +20,6 @@ const reducer = (state=initialState,action) =>{
       })
       .then(res => console.log(res))
   
-      state.pseudo = ''
       state.content = ''
   }
 
