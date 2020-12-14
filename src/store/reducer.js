@@ -5,34 +5,40 @@ const initialState = {
   pageReloaded : false,
   messages : [],
   pseudo : '',
-  content : '',
+  content : ''
 
 }
 
 
-const reducer = (state=initialState,action) =>{
+function reducer(state=initialState,action){
 
-  if (action.type === 'INSERT') {
-    
-    Axios.post('http://localhost:3002/postMessage', {
-      pseudo : state.pseudo,
-      content : state.content
-      })
-      .then(res => console.log(res))
-  
-      state.content = ''
-  }
-
-  if (action.type === 'LOAD') {
-    
     Axios.get('http://localhost:3002/messages')
-      .then((res)=>{
-        state.messages = res.data
-      })
-  }
+    .then((res)=>{
+      state.messages = res.data
+    })
+
+  
 
 
-  return state
+  // if (action.type === 'INSERT') {
+  //   Axios.post('http://localhost:3002/postMessage', {
+  //     pseudo : state.pseudo,
+  //     content : state.content
+  //     })
+  //     .then(res => console.log(res))
+  
+  //     state.content = ''
+    
+  // }
+
+  // if (action.type === 'LOAD') {
+    
+  //   Axios.get('http://localhost:3002/messages')
+  //     .then((res)=>{
+  //       state.messages = res.data
+  //     })
+  // }
+
 }
 
 

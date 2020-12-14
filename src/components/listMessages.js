@@ -1,54 +1,47 @@
-import React, { Component } from 'react'
-import Message from './message'
-import {connect} from 'react-redux'
+import React, {} from 'react'
+// import Message from './message'
+import {useSelector } from 'react-redux'
 
 
-class ListeMessages extends Component{
+export default function ListeMessages(){
 
 
-  componentDidMount(){
-    this.props.chargerMessages()
-    console.log(this.props.messages);
-  }
+  const page = useSelector(state => state.pageReloaded)
+  console.log(page);
+  // const dispatch = useDispatch()
+
+  
+  
+  // const chargerMessages = ()=>{
+  //   dispatch({
+  //     type : 'LOAD'
+  //   })
+  // }
 
 
 
-  render(){
 
-    const messages = this.props.messages.map(message=>{
-      return <Message
-        key = {message.id}
-        pseudo = {message.pseudo}
-        content = {message.content}
-      />
-    })
+  
+    
+  
 
-    console.log(this.props.reloader);
+  
+
+    // const messages = listeMessages.map(message=>{
+    //   return <Message
+    //     key = {message.id}
+    //     pseudo = {message.pseudo}
+    //     content = {message.content}
+    //   />
+    // })
+
+  
 
     return(
       
       <div className="flex flex-col gap-1">
-        {messages}
+        {/* {messages} */}
       </div>
 
     )
   }
-}
-
-
-const mapStateToProps = state =>{
-  return{
-    reloader : state.pageReloaded,
-    messages : state.messages
-  }
-}
-
-const mapDispatchToProps = dispatch =>{
-  return{
-    chargerMessages : ()=> dispatch({type:'LOAD'})
-  }
-}
-
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(ListeMessages)

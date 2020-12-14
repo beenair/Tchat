@@ -1,62 +1,49 @@
-import React, { Component } from 'react'
-import {connect} from 'react-redux'
+import React, {} from 'react'
+import {useSelector, useDispatch} from 'react-redux'
 
 
-class FrmNewMessage extends Component{
+export default function FrmNewMessage(){
 
-  state = {
-    content : '',
-    pseudo : ''
+  let pseudo = useSelector(state=>state.pseudo)
+  let content = useSelector(state=>state.content)
+  const dispatch = useDispatch()
+
+
+  const insertNewMessage = ()=>{
+    dispatch({
+      type : 'INSERT'
+    })
   }
 
 
-  handleMessage = e=>{
-    this.setState({content : e.target.value})
+  const handleMessage = e=>{
+    content = e.target.value
   }
 
-  handlePseudo = e=>{
-    this.setState({pseudo : e.target.value})
+  const handlePseudo = e=>{
+    pseudo = e.target.value
   }
 
 
 
-  render(){
+  return(
 
-    return(
-
-        <div className="w-full  flex flex-row gap-2 items-center">
-          {/* Input pseudo */}
-          <div className=" px-2">
-            <input className="w-24 bg-gray-200 border-2 border-gray-300" type='text' value={this.props.pseudo} onChange={this.handlePseudo}></input>
-          </div>
-          {/* Input message */}
-          <div className=" px-2 flex-1">
-            <input className="w-full bg-gray-200 border-2 border-gray-300" type='text' value={this.props.content} onChange={this.handleMessage}></input>
-          </div>
-          {/* Bouton envoyer */}
-          <div className="w-24 h-full">
-            <input className="text-white font-semibold bg-green-500 p-2 rounded-md cursor-pointer" type='submit' value='Envoyer' onClick={this.props.insertMessage}/>
-          </div>
+      <div className="w-full  flex flex-row gap-2 items-center">
+        {/* Input pseudo */}
+        <div className=" px-2">
+          <input className="w-24 bg-gray-200 border-2 border-gray-300" type='text' value={pseudo} onChange={handlePseudo}></input>
         </div>
+        {/* Input message */}
+        <div className=" px-2 flex-1">
+          <input className="w-full bg-gray-200 border-2 border-gray-300" type='text' value={content} onChange={handleMessage}></input>
+        </div>
+        {/* Bouton envoyer */}
+        <div className="w-24 h-full">
+          <input className="text-white font-semibold bg-green-500 p-2 rounded-md cursor-pointer" type='submit' value='Envoyer' onClick={insertNewMessage}/>
+        </div>
+      </div>
 
-    )
+  )
+
+
   }
-}
-
-
-const mapStateToProps = state =>{
-  return{
-    reloader : state.pageReloaded,
-    pseudo : state.pseudo,
-    content : state.content,
-  }
-}
-
-const mapDispatchToProps = dispatch =>{
-  return{
-    insertMessage : ()=> dispatch({type : 'INSERT'})
-  }
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(FrmNewMessage)
