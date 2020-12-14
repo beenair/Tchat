@@ -1,5 +1,5 @@
 import React from 'react'
-import FrmNewMessage from './components/frmNewMessage'
+// import FrmNewMessage from './components/frmNewMessage'
 import ListeMessages from './components/listMessages'
 import './tailwind.css'
 
@@ -15,9 +15,9 @@ function App() {
         <ListeMessages/>
       </div>
 
-      <div className="h-14 mb-8 flex items-center border-2 border-gray-400">
+      {/* <div className="h-14 mb-8 flex items-center border-2 border-gray-400">
         <FrmNewMessage/>
-      </div>
+      </div> */}
 
     </div>
   );

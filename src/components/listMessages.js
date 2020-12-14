@@ -1,32 +1,35 @@
-import React, {} from 'react'
+import React, {useState} from 'react'
 // import Message from './message'
-import {useSelector } from 'react-redux'
+import {useSelector} from 'react-redux'
+import Axios from 'axios'
 
 
-export default function ListeMessages(){
+const ListeMessages = ()=>{
 
+  
+  const pageReloaded = useSelector(state => state.reloaded)
 
-  const page = useSelector(state => state.pageReloaded)
-  console.log(page);
-  // const dispatch = useDispatch()
+  let [messages, setMessages] = useState();
+
+  console.log(pageReloaded);
+
 
   
   
-  // const chargerMessages = ()=>{
-  //   dispatch({
-  //     type : 'LOAD'
-  //   })
-  // }
-
-
-
-
   
+  function chargerMessages(){
+
+    Axios.get('http://localhost:3002/messages')
+      .then((res)=>{
+      setMessages(messages = res.data)
+      })
+    }
+  
+
+    // chargerMessages()
+  
+
     
-  
-
-  
-
     // const messages = listeMessages.map(message=>{
     //   return <Message
     //     key = {message.id}
@@ -45,3 +48,6 @@ export default function ListeMessages(){
 
     )
   }
+
+
+  export default ListeMessages

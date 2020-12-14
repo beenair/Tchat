@@ -12,10 +12,22 @@ const initialState = {
 
 function reducer(state=initialState,action){
 
-    Axios.get('http://localhost:3002/messages')
-    .then((res)=>{
-      state.messages = res.data
-    })
+  switch (action.type) {
+    case 'LOAD':
+      return{
+        ...state,
+        messages :Axios.get('http://localhost:3002/messages')
+        .then((res)=>{
+        return res.data
+      })
+      }
+      
+  
+    default:
+      return state
+  }
+
+    
 
   
 
